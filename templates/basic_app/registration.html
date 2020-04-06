@@ -1,0 +1,41 @@
+{% extends 'basic_app/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body_block %}
+
+<div class='jumbotron'>
+    {% if registered %}
+        <h1 class="display-4">Thank you for registering</h1>
+    {% else %}
+        <h1 class="display-4">Register Here!</h1>
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-4">
+                    {{ user_form.username|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ user_form.email|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ user_form.password|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    {{ profile_form.portfolio_site|as_crispy_field }}
+                </div>
+            </div>
+            {{ profile_form.profile_pic|as_crispy_field }}
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    {% endif %}
+</div>
+
+{% endblock %}
